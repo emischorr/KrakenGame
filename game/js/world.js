@@ -31,7 +31,7 @@ GameEngine.World.prototype = {
 
     create: function () {
       this.physics.startSystem(Phaser.Physics.ARCADE);
-      this.world.setBounds(0, 0, 800, 2000);
+      this.world.setBounds(0, 0, 800, 5000);
 
       // Background
       this.stage.backgroundColor = '#373d47';
@@ -44,12 +44,10 @@ GameEngine.World.prototype = {
       branchLayer = map.createLayer('branches');
       //  This resizes the game world to match the layer dimensions
       // branchLayer.resizeWorld();
-      branchLayer.fixedToCamera = false;
+      // branchLayer.fixedToCamera = false;
       // branchLayer.scrollFactorX = 0;branchLayer.scrollFactorY = 0;
       // branchLayer.anchor.set(0.5);
-      branchLayer.position.y = this.world.height;
-      // layer.fixedToCamera = false;layer.scrollFactorX = 0;layer.scrollFactorY = 0;layer.position.set(pixelX, pixelY);
-
+      branchLayer.position.x = this.world.width/2 - 225;
 
       // Player
       player = this.add.sprite(this.world.width/2, this.world.height - 150, 'ship');
@@ -90,20 +88,20 @@ GameEngine.World.prototype = {
 
       // Controls
       cursors = this.input.keyboard.createCursorKeys();
-      fireButton = this.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
-      fireButton.onDown.add(this.fireBullet, this);
+      // fireButton = this.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
+      // fireButton.onDown.add(this.fireBullet, this);
       pauseKey = this.input.keyboard.addKey(Phaser.Keyboard.P);
       pauseKey.onDown.add(this.pause, this);
     },
 
     update: function () {
       //  Scroll the background
-      // starfield.tilePosition.y += 2;
+      starfield.tilePosition.y += 2;
       // branchLayer.position.y -= 2;
       this.camera.y -= 1;
 
       this.playerMovement();
-      if (this.input.activePointer.leftButton.isDown) {
+      if (this.input.activePointer.leftButton.isDown || this.input.keyboard.isDown(Phaser.Keyboard.SPACEBAR)) {
         this.fireBullet();
       }
 
@@ -139,10 +137,18 @@ GameEngine.World.prototype = {
       player.body.velocity.setTo(0, 0);
       player.body.angularVelocity = 0;
 
-      if (cursors.left.isDown) { player.body.velocity.x = -150; }
-      else if (cursors.right.isDown) { player.body.velocity.x = 150; }
-      if (cursors.up.isDown) { player.body.velocity.y = -150; }
-      else if (cursors.down.isDown) { player.body.velocity.y = 150; }
+      if (cursors.left.isDown || this.input.keyboard.isDown(Phaser.Keyboard.A)) {
+        player.body.velocity.x = -150;
+      }
+      else if (cursors.right.isDown || this.input.keyboard.isDown(Phaser.Keyboard.D)) {
+        player.body.velocity.x = 150;
+      }
+      if (cursors.up.isDown || this.input.keyboard.isDown(Phaser.Keyboard.W)) {
+        player.body.velocity.y = -150;
+      }
+      else if (cursors.down.isDown || this.input.keyboard.isDown(Phaser.Keyboard.S)) {
+        player.body.velocity.y = 150;
+      }
 
       // player.body.velocity.copyFrom(this.physics.arcade.velocityFromAngle(player.angle, 300));
 

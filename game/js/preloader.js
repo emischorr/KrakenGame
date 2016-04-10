@@ -54,7 +54,8 @@ GameEngine.Preloader.prototype = {
   loadResources: function () {
     this.load.image('starfield', 'assets/starfield.png');
     this.load.image('bullet', 'assets/bullet.png');
-    this.load.spritesheet('ship', 'assets/player.png', 32, 48);
+    // this.load.spritesheet('ship', 'assets/ship.png', 50, 50);
+    this.load.image('ship', 'assets/ship.png');
 
     this.load.tilemap('map', 'assets/maps/map.json', null, Phaser.Tilemap.TILED_JSON);
     this.load.image('tiles', 'assets/maps/tileset.png');
