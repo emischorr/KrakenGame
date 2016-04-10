@@ -2,7 +2,7 @@ body {
     margin: 0;
 }
 
-#kraken-game {
+#gameContainer {
   margin: auto;
   width: 800px;
 }

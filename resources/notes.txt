@@ -1,0 +1,35 @@
+git init
+
+git config --local user.name (oder --global mit globaler highscore)
+
+git clone level
+
+git reset --soft (neustart level)
+git reset --hard (neustart spiel)
+git commit (level beenden/highscore speichern)
+
+git stash / unstash (pause game)
+
+git --help (Hilfe/Steuerung)
+
+git garbage collection als Feinde zum Ausweichen
+
+
+#### MAP ####
+verschiedene layer für unterschiedliche branches (-> farben)
+
+
+#### DESIGN ####
+Image für Schrift: https://pbs.twimg.com/media/CfYv6h3XEAAswiQ.jpg:large
+
+
+#### TEXT ####
+
+git push your rockets/laser gun
+
+Bad guys trying to steal your commits (start game)
+But be aware there are also other version controls out there trying to make the life of your dev crew harder than it has to be (start game)
+Make your self ready and clone that repo (start game)
+Get Your Kraken and ... (start game)
+
+Is this your first time using git? You should read git --help (loose game)

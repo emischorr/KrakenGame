@@ -4,12 +4,22 @@
 	<meta charset="UTF-8" />
 	<title>Kraken</title>
 	<script type="text/javascript" src="js/phaser.js"></script>
-  <script type="text/javascript" src="js/game.js"></script>
+	<script type="text/javascript" src="js/boot.js"></script>
   <link rel="stylesheet" href="css/layout.css">
 </head>
 <body>
 
-  <div id="kraken-game"></div>
+  <div id="gameContainer"></div>
+
+	<script type="text/javascript">
+		window.onload = function() {
+			var game = new Phaser.Game(800, 600, Phaser.AUTO, 'gameContainer');
+			//	Add the States your game has.
+			game.state.add('Boot', GameEngine.Boot);
+			//	Now start the Boot state.
+			game.state.start('Boot');
+		};
+	</script>
 
 </body>
 </html>
