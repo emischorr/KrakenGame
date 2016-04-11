@@ -33,7 +33,7 @@ hellblau: #009fc1;
 blau: #0063fa;
 lila: #9000c4;
 pink: #c809b8;
-rosa: #dd0571;
+    rosa: #dd0571;
 rot: #d00e00;
 orange: #f55f24;
 
@@ -58,4 +58,8 @@ Get Your Kraken and ... (start game)
 
 Is this your first time using git? You should read git --help (loose game)
 
+
+#### SOUND ####
+
+http://www.superflashbros.net/as3sfxr/
 

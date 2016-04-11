@@ -31,7 +31,7 @@ GameEngine.World.prototype = {
 
     create: function () {
       this.physics.startSystem(Phaser.Physics.ARCADE);
-      this.world.setBounds(0, 0, 800, 5000);
+      this.world.setBounds(0, 0, 800, 6000); //TODO: set to map size
 
       // Background
       this.stage.backgroundColor = '#373d47';
@@ -41,13 +41,16 @@ GameEngine.World.prototype = {
       map = this.add.tilemap('map');
       //the first parameter is the tileset name as specified in Tiled, the second is the key to the asset
       map.addTilesetImage('tileset', 'tiles');
-      branchLayer = map.createLayer('branches');
+      branch1Layer = map.createLayer('branches1');
+      branch2Layer = map.createLayer('branches2');
       //  This resizes the game world to match the layer dimensions
       // branchLayer.resizeWorld();
       // branchLayer.fixedToCamera = false;
       // branchLayer.scrollFactorX = 0;branchLayer.scrollFactorY = 0;
       // branchLayer.anchor.set(0.5);
-      branchLayer.position.x = this.world.width/2 - 225;
+      // branchLayer.scale.set(0.8, 0.8);
+      branch1Layer.cameraOffset.x = this.world.width/2 - 225;
+      branch2Layer.cameraOffset.x = this.world.width/2 - 225;
 
       // Player
       player = this.add.sprite(this.world.width/2, this.world.height - 150, 'ship');
@@ -92,11 +95,16 @@ GameEngine.World.prototype = {
       // fireButton.onDown.add(this.fireBullet, this);
       pauseKey = this.input.keyboard.addKey(Phaser.Keyboard.P);
       pauseKey.onDown.add(this.pause, this);
+
+      // Sounds
+      laserSound = this.add.audio('laser');
+      explosionSound = this.add.audio('explosion');
+      powerupSound = this.add.audio('powerup');
     },
 
     update: function () {
       //  Scroll the background
-      starfield.tilePosition.y += 2;
+      starfield.tilePosition.y += 0.8;
       // branchLayer.position.y -= 2;
       this.camera.y -= 1;
 
@@ -166,6 +174,7 @@ GameEngine.World.prototype = {
           // bullet.body.velocity.y = -400;
           this.physics.arcade.moveToPointer(bullet, 400);
           this.bulletTime = this.time.now + 200;
+          laserSound.play();
         }
       }
     },

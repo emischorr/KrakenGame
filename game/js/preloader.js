@@ -56,6 +56,10 @@ GameEngine.Preloader.prototype = {
 	},
 
   loadResources: function () {
+    this.load.audio('laser', 'assets/sfx/laser.ogg');
+    this.load.audio('explosion', 'assets/sfx/explosion.ogg');
+    this.load.audio('powerup', 'assets/sfx/powerup.ogg');
+
     this.load.image('gitkraken', 'assets/ui/gitkraken.png');
 
     this.load.image('starfield', 'assets/starfield.png');
