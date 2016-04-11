@@ -2,7 +2,48 @@ body {
     margin: 0;
 }
 
+#gui {
+  position: absolute;
+  left: 0;
+  right: 0;
+  margin: auto;
+  width: 100%;
+  height: 100%;
+  max-width: 1370px;
+  max-height: 670px;
+  background-color: #373d47;
+  background-image: url('../images/git-gui.png');
+}
+
+.gui {
+  background-color: #373d47;
+  position: fixed;
+}
+
+#gui-header {
+  width: 100%;
+  height: 50px;
+}
+
+#gui-sidebar-left {
+
+}
+
 #gameContainer {
+  position: absolute;
+  top: 40px;
+  left: 174px;
+  /* left: -224px; right: 0; */
   margin: auto;
   width: 800px;
+  z-index: 100;
+}
+
+#gui-sidebar-right {
+
+}
+
+#gui-footer {
+  width: 100%;
+  height: 50px;
 }

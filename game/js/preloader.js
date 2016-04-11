@@ -11,7 +11,8 @@ GameEngine.Preloader.prototype = {
 		//	These are the assets we loaded in Boot.js
 		//	A nice sparkly background and a loading progress bar
 		// this.background = this.add.sprite(0, 0, 'preloaderBackground');
-    this.background = this.add.tileSprite(0, 0, this.world.width, this.world.height, 'preloaderBackground');
+    this.stage.backgroundColor = '#242728';
+    // this.background = this.add.tileSprite(0, 0, this.world.width, this.world.height, 'preloaderBackground');
 
 		this.preloadBar = this.add.sprite(this.world.centerX, this.world.centerY + 100, 'preloaderBar');
     this.preloadBar.anchor.setTo(0.5);
@@ -19,6 +20,9 @@ GameEngine.Preloader.prototype = {
 		//	What that does is automatically crop the sprite from 0 to full-width
 		//	as the files below are loaded in.
 		this.load.setPreloadSprite(this.preloadBar);
+
+    var t = this.game.add.text(this.game.width/2, this.game.height/2, "git init", { font: "30px Arial", fill: "#fff", align: "center" });
+    t.anchor.set(0.5);
 
 		//	Here we load the rest of the assets our game needs.
 		this.loadResources();
@@ -52,6 +56,8 @@ GameEngine.Preloader.prototype = {
 	},
 
   loadResources: function () {
+    this.load.image('gitkraken', 'assets/ui/gitkraken.png');
+
     this.load.image('starfield', 'assets/starfield.png');
     this.load.image('bullet', 'assets/bullet.png');
     // this.load.spritesheet('ship', 'assets/ship.png', 50, 50);

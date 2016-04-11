@@ -16,11 +16,35 @@ git garbage collection als Feinde zum Ausweichen
 
 
 #### MAP ####
-verschiedene layer für unterschiedliche branches (-> farben)
+verschiedene layer für unterschiedliche branches (-> farben) (ACHTUNG: performance!)
+Alternativ ein layer und tileset um verschiedene Farben erweitern
 
 
 #### DESIGN ####
 Image für Schrift: https://pbs.twimg.com/media/CfYv6h3XEAAswiQ.jpg:large
+
+zwischen Map und Background noch eine layer (mit branch bild) für parallex effect
+
+background farbe: #242728;
+branch-farben:
+-------
+grün: #0dc797;
+hellblau: #009fc1;
+blau: #0063fa;
+lila: #9000c4;
+pink: #c809b8;
+rosa: #dd0571;
+rot: #d00e00;
+orange: #f55f24;
+
+
+#### GAMEPLAY ####
+
+- Spieler bewegt sich von unten nach oben
+- oben angekommen ist das level beendet
+- Punkte pro gerettetem Commit
+- Garbage Collection als großer Pacman (Gegner) der sich nur vertikal bewegt (wenn kollision -> game over)
+- PowerUps ?!
 
 
 #### TEXT ####
@@ -33,3 +57,5 @@ Make your self ready and clone that repo (start game)
 Get Your Kraken and ... (start game)
 
 Is this your first time using git? You should read git --help (loose game)
+
+
