@@ -152,13 +152,15 @@ GameEngine.World.prototype = {
       this.physics.arcade.overlap(player, enemies, this.playerHitsEnemy, null, this);
       this.physics.arcade.overlap(player, powerups, this.playerCollectsPowerUp, null, this);
 
+      this.checkEnemiesMissed();
+
       this.updateScoreText();
     },
 
     render: function() {
       // this.game.debug.cameraInfo(this.camera, 32, 32);
       // this.game.debug.spriteBounds(player);
-      // this.game.debug.spriteInfo(player, 20, 32);
+      // this.game.debug.spriteInfo(player, this.camera.width-400, 32);
     },
 
     quitGame: function (pointer) {
@@ -204,7 +206,26 @@ GameEngine.World.prototype = {
         // TODO: replace '175' with this.mapOffsetX. Workaround!
         e = enemies.create(element.x + 175 + rnd.integerInRange(-2, 2), element.y - 15 + i*10 + rnd.integerInRange(-2, 2), 'enemy');
         e.hp = 5;
+        e.autoCull = true;
       };
+    },
+
+    checkEnemiesMissed: function() {
+      var self = this
+      enemies.forEach(function(e) {
+        // seems kill() does not remove the sprite
+        if (e.alive && e.y >= self.game.camera.y + self.game.camera.height) {
+          self.enemyOut(e);
+        }
+      })
+    },
+
+    enemyOut: function(enemy) {
+      // TODO: check for commit group
+      console.log("commit missed");
+      // TODO: print message
+      this.score -= 50;
+      enemy.kill();
     },
 
     moveEnemies: function() {
