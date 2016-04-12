@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-up" width="9" height="120" tilewidth="50" tileheight="50" nextobjectid="5">
- <tileset firstgid="1" name="tileset" tilewidth="50" tileheight="50" tilecount="81" columns="9">
+<map version="1.0" orientation="orthogonal" width="9" height="120" tilewidth="50" tileheight="50">
+ <tileset firstgid="1" name="tileset" tilewidth="50" tileheight="50">
   <image source="tileset.png" width="450" height="450"/>
  </tileset>
  <layer name="branches1" width="9" height="120">
@@ -251,13 +251,12 @@
 0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <objectgroup name="objects">
-  <object id="1" name="goal" x="207" y="4161" width="35" height="32"/>
-  <object id="2" type="commit" x="208" y="5159" width="30" height="31">
+ <objectgroup name="objects" width="0" height="0">
+  <object name="goal" x="207" y="4161" width="35" height="32"/>
+  <object type="powerup" x="60" y="4713" width="29" height="29">
    <ellipse/>
   </object>
-  <object id="3" type="powerup" x="60" y="4713" width="29" height="29">
-   <ellipse/>
-  </object>
+  <object type="commit" gid="74" x="200" y="5451"/>
+  <object type="commit" gid="74" x="100" y="5650"/>
  </objectgroup>
 </map>

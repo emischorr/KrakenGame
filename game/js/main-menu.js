@@ -19,13 +19,17 @@ GameEngine.MainMenu.prototype = {
 
     var header = this.add.sprite(this.game.width/2, 150, 'gitkraken');
     header.anchor.set(0.5);
+    header.alpha = 0.1;
+    this.add.tween(header).to( { alpha: 1 }, 2000, "Linear", true);
 
     //start game text
     var text = "Tap to clone repo...";
-    var style = { font: "30px Arial", fill: "#fff", align: "center" };
+    var style = { font: "25px Arial", fill: "#fff", align: "center" };
     var t = this.game.add.text(this.game.width/2, this.game.height/2, text, style);
     t.anchor.set(0.5);
-    //TODO: animate text (pulse/fade in-out)
+    t.alpha = 0.1;
+    var textTween = this.add.tween(t).to( { alpha: 1 }, 500, "Linear", true);
+    textTween.yoyo(true, 1000);
 	},
 
 	update: function () {

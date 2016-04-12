@@ -23,19 +23,16 @@
          "y":0
         }, 
         {
-         "draworder":"topdown",
          "height":0,
          "name":"objects",
          "objects":[
                 {
                  "height":32,
-                 "id":1,
                  "name":"goal",
                  "properties":
                     {
 
                     },
-                 "rotation":0,
                  "type":"",
                  "visible":true,
                  "width":35,
@@ -44,35 +41,45 @@
                 }, 
                 {
                  "ellipse":true,
-                 "height":31,
-                 "id":2,
-                 "name":"",
-                 "properties":
-                    {
-
-                    },
-                 "rotation":0,
-                 "type":"commit",
-                 "visible":true,
-                 "width":30,
-                 "x":208,
-                 "y":5159
-                }, 
-                {
-                 "ellipse":true,
                  "height":29,
-                 "id":3,
                  "name":"",
                  "properties":
                     {
 
                     },
-                 "rotation":0,
                  "type":"powerup",
                  "visible":true,
                  "width":29,
                  "x":60,
                  "y":4713
+                }, 
+                {
+                 "gid":74,
+                 "height":0,
+                 "name":"",
+                 "properties":
+                    {
+
+                    },
+                 "type":"commit",
+                 "visible":true,
+                 "width":0,
+                 "x":200,
+                 "y":5451
+                }, 
+                {
+                 "gid":74,
+                 "height":0,
+                 "name":"",
+                 "properties":
+                    {
+
+                    },
+                 "type":"commit",
+                 "visible":true,
+                 "width":0,
+                 "x":100,
+                 "y":5650
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -81,17 +88,14 @@
          "x":0,
          "y":0
         }],
- "nextobjectid":5,
  "orientation":"orthogonal",
  "properties":
     {
 
     },
- "renderorder":"right-up",
  "tileheight":50,
  "tilesets":[
         {
-         "columns":9,
          "firstgid":1,
          "image":"..\/..\/..\/resources\/tileset.png",
          "imageheight":450,
@@ -103,7 +107,6 @@
 
             },
          "spacing":0,
-         "tilecount":81,
          "tileheight":50,
          "tilewidth":50
         }],

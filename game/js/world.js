@@ -22,8 +22,11 @@ GameEngine.World = function (game) {
     //  You can use any of these from any function within this State.
     //  But do consider them as being 'reserved words', i.e. don't create a property for your own game called "world" or you'll over-write the world reference.
 
+    this.mapOffsetX = 0;
+
     this.score = 0;
     this.bulletTime = 0;
+    this.invincibleTime = 0;
 
 };
 
@@ -49,8 +52,11 @@ GameEngine.World.prototype = {
       // branchLayer.scrollFactorX = 0;branchLayer.scrollFactorY = 0;
       // branchLayer.anchor.set(0.5);
       // branchLayer.scale.set(0.8, 0.8);
-      branch1Layer.cameraOffset.x = this.world.width/2 - 225;
-      branch2Layer.cameraOffset.x = this.world.width/2 - 225;
+      this.mapOffsetX = this.world.width/2 - 225
+      branch1Layer.cameraOffset.x = this.mapOffsetX;
+      branch2Layer.cameraOffset.x = this.mapOffsetX;
+      branch1Layer.tint = 0xdddddd;
+      branch2Layer.tint = 0xdddddd;
 
       // Player
       player = this.add.sprite(this.world.width/2, this.world.height - 150, 'ship');
@@ -58,6 +64,7 @@ GameEngine.World.prototype = {
       this.physics.arcade.enable(player);
       player.body.collideWorldBounds = true;
       player.body.allowRotation = true;
+      player.lives = 2;
 
       //the camera will follow the player in the world
       // this.game.camera.follow(player);
@@ -74,15 +81,24 @@ GameEngine.World.prototype = {
       bullets.setAll('outOfBoundsKill', true);
       bullets.setAll('checkWorldBounds', true);
 
+      // Powerups
+      powerups = this.add.group();
+      powerups.enableBody = true;
+      powerups.physicsBodyType = Phaser.Physics.ARCADE;
+      // this.setupPowerUps();
+
       // Enemies
       enemies = this.add.group();
       enemies.enableBody = true;
       enemies.physicsBodyType = Phaser.Physics.ARCADE;
-      enemies.createMultiple(30, 'ship');
-      enemies.setAll('anchor.x', 0.5);
-      enemies.setAll('anchor.y', 1);
-      enemies.setAll('outOfBoundsKill', true);
-      enemies.setAll('checkWorldBounds', true);
+      // map.createFromObjects('objects', 74, 'enemy', 0, true, false, enemies);
+      // enemies.position.x += mapOffsetX;
+      this.setupEnemies();
+
+      //  An explosion pool
+      explosions = this.add.group();
+      explosions.createMultiple(30, 'explosion');
+      explosions.forEach(this.setupExplosion, this);
 
       //  Score
       scoreString = 'Score : ';
@@ -108,6 +124,11 @@ GameEngine.World.prototype = {
       // branchLayer.position.y -= 2;
       this.camera.y -= 1;
 
+      this.resetInvincible();
+      this.checkPowerUps();
+
+      this.moveEnemies();
+
       this.playerMovement();
       if (this.input.activePointer.leftButton.isDown || this.input.keyboard.isDown(Phaser.Keyboard.SPACEBAR)) {
         this.fireBullet();
@@ -121,10 +142,17 @@ GameEngine.World.prototype = {
       if (player.position.y - player.height/2 <= this.camera.y) {
         player.position.y = this.camera.y + player.height/2;
       }
+
+      //  Run collision
+      this.physics.arcade.overlap(bullets, enemies, this.bulletHitsEnemy, null, this);
+      this.physics.arcade.overlap(player, enemies, this.playerHitsEnemy, null, this);
+      this.physics.arcade.overlap(player, powerups, this.playerCollectsPowerUp, null, this);
+
+      this.updateScoreText();
     },
 
     render: function() {
-      this.game.debug.cameraInfo(this.camera, 32, 32);
+      // this.game.debug.cameraInfo(this.camera, 32, 32);
       // this.game.debug.spriteBounds(player);
       // this.game.debug.spriteInfo(player, 20, 32);
     },
@@ -140,6 +168,46 @@ GameEngine.World.prototype = {
     },
 
 
+
+    setupExplosion: function(explosion) {
+      explosion.anchor.x = 0.5;
+      explosion.anchor.y = 0.5;
+      explosion.animations.add('explosion');
+      explosion.scale.setTo(0.5, 0.5);
+    },
+
+    setupPowerUps: function() {
+      map.objects['objects'].forEach(function(element){
+        if(element.type === "powerup") {
+          p = powerups.create(element.x + 175, element.y, element.properties.sprite);
+        };
+      });
+    },
+
+    setupEnemies: function() {
+      var rnd = this.game.rnd;
+
+      map.objects['objects'].forEach(function(element){
+        // console.log(element);
+        if(element.type === "commit") {
+          for (var i = 0; i < 3; i++) {
+            // TODO: replace '175' with this.mapOffsetX. Workaround!
+            e = enemies.create(element.x + 175 + rnd.integerInRange(-2, 2), element.y - 50 + i*10 + rnd.integerInRange(-2, 2), 'enemy');
+            e.hp = 5;
+          };
+        };
+      });
+    },
+
+    moveEnemies: function() {
+      var rnd = this.game.rnd;
+      enemies.forEach(function(enemy) {
+        enemy.position.x += rnd.integerInRange(-1, 1);
+        enemy.position.y += rnd.integerInRange(-1, 1);
+      });
+      // enemies.position.x += this.game.rnd.integerInRange(-1, 1);
+      // enemies.position.y += this.game.rnd.integerInRange(-1, 1);
+    },
 
     playerMovement: function() {
       player.body.velocity.setTo(0, 0);
@@ -177,6 +245,87 @@ GameEngine.World.prototype = {
           laserSound.play();
         }
       }
+    },
+
+    bulletHitsEnemy: function(bullet, enemy) {
+      bullet.kill();
+      if (enemy.hp <= 1) {
+        enemy.kill();
+
+        this.score += 10;
+
+        // TODO: add explosion
+        var explosion = explosions.getFirstExists(false);
+        explosion.reset(enemy.body.x, enemy.body.y);
+        explosion.play('explosion', 30, false, true);
+        explosionSound.play();
+      } else {
+        enemy.hp -= 1;
+      }
+    },
+
+    playerHitsEnemy: function(player, enemy) {
+      if (player.hasRagePowerUp) { // TODO: powerup that destroys enemy
+        enemy.kill();
+      } else {
+        this.hitPlayer();
+      }
+    },
+
+    playerCollectsPowerUp: function(player, powerup) {
+      // TODO: collect powerup
+      // TODO: check if player is invincible
+      // if () {
+      //   player.hasRagePowerUp = true;
+      //   player.ragePowerUptTime = this.time.now + 200;
+      // }
+    },
+
+    checkPowerUps: function() {
+      if (player.ragePowerUptTime <= this.time.now) {
+        player.hasRagePowerUp = false;
+      }
+    },
+
+    resetPowerUps: function() {
+      player.hasRagePowerUp = false;
+      player.ragePowerUptTime = 0;
+    },
+
+    hitPlayer: function() {
+      if (!player.invincible) {
+        console.log('player hit: lives: '+player.lives);
+        if (player.lives <= 1) {
+          this.resetPowerUps();
+          this.killPlayer();
+        } else {
+          player.lives -= 1;
+          this.resetPowerUps();
+          player.invincible = true;
+          this.invincibleTime = this.time.now + 3000;
+          // TODO: remove player from enemy/object
+          player.position.y += 50;
+          // player hit animation; pulse; change alpha
+          player.alpha = 0.5;
+          var tween = this.game.add.tween(player).to( { alpha: 1 }, 200, "Linear", true);
+          tween.repeat(10, 200);
+        }
+      }
+    },
+
+    resetInvincible: function() {
+      if (player.invincible && this.invincibleTime <= this.time.now) {
+        player.invincible = false;
+      }
+    },
+
+    killPlayer: function() {
+      player.kill();
+      // TODO: GAME OVER Screen
+    },
+
+    updateScoreText: function() {
+      scoreText.text = scoreString + this.score;
     },
 
     pause: function() {
