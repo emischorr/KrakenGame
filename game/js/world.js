@@ -28,6 +28,9 @@ GameEngine.World = function (game) {
     this.bulletTime = 0;
     this.invincibleTime = 0;
 
+    this.leftOffsetPoint = new Phaser.Point();
+    this.rightOffsetPoint = new Phaser.Point();
+
 };
 
 GameEngine.World.prototype = {
@@ -65,6 +68,7 @@ GameEngine.World.prototype = {
       player.body.collideWorldBounds = true;
       player.body.allowRotation = true;
       player.lives = 2;
+      player.hasDoubleShot = true;
 
       //the camera will follow the player in the world
       // this.game.camera.follow(player);
@@ -75,7 +79,7 @@ GameEngine.World.prototype = {
       bullets = this.add.group();
       bullets.enableBody = true;
       bullets.physicsBodyType = Phaser.Physics.ARCADE;
-      bullets.createMultiple(30, 'bullet');
+      bullets.createMultiple(60, 'bullet');
       bullets.setAll('anchor.x', 0.5);
       bullets.setAll('anchor.y', 1);
       bullets.setAll('outOfBoundsKill', true);
@@ -131,7 +135,7 @@ GameEngine.World.prototype = {
 
       this.playerMovement();
       if (this.input.activePointer.leftButton.isDown || this.input.keyboard.isDown(Phaser.Keyboard.SPACEBAR)) {
-        this.fireBullet();
+        this.shoot();
       }
 
       // prevent player from leaving camera to the bottom
@@ -229,21 +233,38 @@ GameEngine.World.prototype = {
       // player.body.velocity.copyFrom(this.physics.arcade.velocityFromAngle(player.angle, 300));
 
       // player.body.angularVelocity = -200;
-      player.rotation = this.currentRotation();
+      player.rotation = this.currentRotation() + this.game.math.degToRad(90);
     },
 
-    fireBullet: function() {
-      if (this.time.now > this.bulletTime) {
-        bullet = bullets.getFirstExists(false);
+    shoot: function() {
+      if (!player.invincible && this.time.now > this.bulletTime) {
+        rotation = this.currentRotation();
 
-        if (bullet) {
-          bullet.reset(player.x, player.y + 8);
-          bullet.rotation = this.currentRotation();
-          // bullet.body.velocity.y = -400;
-          this.physics.arcade.moveToPointer(bullet, 400);
-          this.bulletTime = this.time.now + 200;
-          laserSound.play();
+        if (player.hasDoubleShot) {
+          leftPoint = this.leftOffsetPoint.copyFrom(player).add(0,10).rotate(player.x, player.y, rotation-this.game.math.degToRad(180), false);
+          rightPoint = this.rightOffsetPoint.copyFrom(player).add(0,10).rotate(player.x, player.y, rotation, false);
+          this.createBullet(leftPoint.x, leftPoint.y, rotation);
+          this.createBullet(rightPoint.x, rightPoint.y, rotation);
+        } else {
+          this.createBullet(player.x, player.y + 8, rotation);
         }
+        if (player.hasSideShot) {
+
+        }
+        laserSound.play();
+      }
+    },
+
+    createBullet: function(x, y, rotation) {
+      bullet = bullets.getFirstExists(false);
+
+      if (bullet) {
+        bullet.reset(x, y);
+        bullet.rotation = rotation + this.game.math.degToRad(90);
+        // bullet.body.velocity.y = -400;
+        // this.physics.arcade.moveToPointer(bullet, 400);
+        this.physics.arcade.velocityFromRotation(rotation, 400, bullet.body.velocity);
+        this.bulletTime = this.time.now + 200;
       }
     },
 
@@ -290,6 +311,8 @@ GameEngine.World.prototype = {
     resetPowerUps: function() {
       player.hasRagePowerUp = false;
       player.ragePowerUptTime = 0;
+      player.hasDoubleShot = false;
+      player.hasSideShot = false;
     },
 
     hitPlayer: function() {
@@ -334,7 +357,7 @@ GameEngine.World.prototype = {
     },
 
     currentRotation: function() {
-      return this.physics.arcade.angleToPointer(player) + this.game.math.degToRad(90);
+      return this.physics.arcade.angleToPointer(player);
     }
 
 };
