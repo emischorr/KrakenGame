@@ -69,6 +69,9 @@ GameEngine.Preloader.prototype = {
     this.load.image('ship', 'assets/ship.png');
     this.load.image('enemy', 'assets/enemy.png');
 
+    this.load.image('extralive', 'assets/ship.png');
+    this.load.image('duallaser', 'assets/ship.png');
+
     this.load.tilemap('map', 'assets/maps/map.json', null, Phaser.Tilemap.TILED_JSON);
     this.load.image('tiles', 'assets/maps/tileset.png');
 

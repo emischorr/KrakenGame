@@ -67,8 +67,8 @@ GameEngine.World.prototype = {
       this.physics.arcade.enable(player);
       player.body.collideWorldBounds = true;
       player.body.allowRotation = true;
-      player.lives = 2;
-      player.hasDoubleShot = true;
+      player.lives = 1;
+      player.hasDoubleShot = false;
 
       //the camera will follow the player in the world
       // this.game.camera.follow(player);
@@ -185,7 +185,7 @@ GameEngine.World.prototype = {
       map.objects['objects'].forEach(function(element){
         // console.log(element);
         if(element.type === "powerup") {
-          // self.setupPowerUps(element);
+          self.setupPowerUps(element);
         } else if (element.type === "commit") {
           self.setupEnemies(element);
         }
@@ -193,7 +193,8 @@ GameEngine.World.prototype = {
     },
 
     setupPowerUps: function(element) {
-      p = powerups.create(element.x + 175, element.y, element.properties.sprite);
+      p = powerups.create(element.x + 175, element.y, element.properties.powerup);
+      p.powerup = element.properties.powerup;
     },
 
     setupEnemies: function(element) {
@@ -201,7 +202,7 @@ GameEngine.World.prototype = {
 
       for (var i = 0; i < 3; i++) {
         // TODO: replace '175' with this.mapOffsetX. Workaround!
-        e = enemies.create(element.x + 175 + rnd.integerInRange(-2, 2), element.y - 50 + i*10 + rnd.integerInRange(-2, 2), 'enemy');
+        e = enemies.create(element.x + 175 + rnd.integerInRange(-2, 2), element.y - 15 + i*10 + rnd.integerInRange(-2, 2), 'enemy');
         e.hp = 5;
       };
     },
@@ -297,12 +298,26 @@ GameEngine.World.prototype = {
     },
 
     playerCollectsPowerUp: function(player, powerup) {
-      // TODO: collect powerup
-      // TODO: check if player is invincible
-      // if () {
-      //   player.hasRagePowerUp = true;
-      //   player.ragePowerUptTime = this.time.now + 200;
-      // }
+      if (!player.invincible) {
+        switch (powerup.powerup) {
+          case "extralive":
+            player.lives += 1;
+            break;
+          case "duallaser":
+            player.hasDoubleShot = true;
+            break;
+          case "rage":
+            player.hasRagePowerUp = true;
+            player.ragePowerUptTime = this.time.now + 200;
+            break;
+          default:
+            console.log("WARNING: Powerup '"+powerup.powerup+"' not supported!");
+        }
+        powerup.kill();
+        powerupSound.play();
+        this.score += 20;
+        // TODO: show powerup text e.g. "Extra Live"
+      }
     },
 
     checkPowerUps: function() {

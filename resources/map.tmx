@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" width="9" height="120" tilewidth="50" tileheight="50">
- <tileset firstgid="1" name="tileset" tilewidth="50" tileheight="50">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="9" height="120" tilewidth="50" tileheight="50" nextobjectid="12">
+ <tileset firstgid="1" name="tileset" tilewidth="50" tileheight="50" tilecount="81" columns="9">
   <image source="tileset.png" width="450" height="450"/>
  </tileset>
  <layer name="branches1" width="9" height="120">
@@ -251,12 +251,37 @@
 0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <objectgroup name="objects" width="0" height="0">
-  <object name="goal" x="207" y="4161" width="35" height="32"/>
-  <object type="powerup" x="60" y="4713" width="29" height="29">
+ <objectgroup name="objects">
+  <object id="1" name="goal" x="207" y="4161" width="35" height="32"/>
+  <object id="2" type="powerup" x="60" y="4713" width="29" height="29">
+   <properties>
+    <property name="powerup" value="duallaser"/>
+   </properties>
    <ellipse/>
   </object>
-  <object type="commit" gid="74" x="200" y="5451"/>
-  <object type="commit" gid="74" x="100" y="5650"/>
+  <object id="5" type="commit" x="62.5" y="4863.5" width="29" height="29">
+   <ellipse/>
+  </object>
+  <object id="6" type="commit" x="262.5" y="5011.5" width="29" height="29">
+   <ellipse/>
+  </object>
+  <object id="7" type="commit" x="112.5" y="5458.5" width="29" height="29">
+   <ellipse/>
+  </object>
+  <object id="8" type="commit" x="214.5" y="5409.5" width="29" height="29">
+   <ellipse/>
+  </object>
+  <object id="9" type="commit" x="160.5" y="5215.5" width="29" height="29">
+   <ellipse/>
+  </object>
+  <object id="10" type="commit" x="362.5" y="4510.5" width="29" height="29">
+   <ellipse/>
+  </object>
+  <object id="11" type="powerup" x="361.5" y="4408.5" width="29" height="29">
+   <properties>
+    <property name="powerup" value="extralive"/>
+   </properties>
+   <ellipse/>
+  </object>
  </objectgroup>
 </map>

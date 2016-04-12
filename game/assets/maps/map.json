@@ -23,16 +23,19 @@
          "y":0
         }, 
         {
+         "draworder":"topdown",
          "height":0,
          "name":"objects",
          "objects":[
                 {
                  "height":32,
+                 "id":1,
                  "name":"goal",
                  "properties":
                     {
 
                     },
+                 "rotation":0,
                  "type":"",
                  "visible":true,
                  "width":35,
@@ -42,11 +45,13 @@
                 {
                  "ellipse":true,
                  "height":29,
+                 "id":2,
                  "name":"",
                  "properties":
                     {
-
+                     "powerup":"duallaser"
                     },
+                 "rotation":0,
                  "type":"powerup",
                  "visible":true,
                  "width":29,
@@ -54,32 +59,116 @@
                  "y":4713
                 }, 
                 {
-                 "gid":74,
-                 "height":0,
+                 "ellipse":true,
+                 "height":29,
+                 "id":5,
                  "name":"",
                  "properties":
                     {
 
                     },
+                 "rotation":0,
                  "type":"commit",
                  "visible":true,
-                 "width":0,
-                 "x":200,
-                 "y":5451
+                 "width":29,
+                 "x":62.5,
+                 "y":4863.5
                 }, 
                 {
-                 "gid":74,
-                 "height":0,
+                 "ellipse":true,
+                 "height":29,
+                 "id":6,
                  "name":"",
                  "properties":
                     {
 
                     },
+                 "rotation":0,
                  "type":"commit",
                  "visible":true,
-                 "width":0,
-                 "x":100,
-                 "y":5650
+                 "width":29,
+                 "x":262.5,
+                 "y":5011.5
+                }, 
+                {
+                 "ellipse":true,
+                 "height":29,
+                 "id":7,
+                 "name":"",
+                 "properties":
+                    {
+
+                    },
+                 "rotation":0,
+                 "type":"commit",
+                 "visible":true,
+                 "width":29,
+                 "x":112.5,
+                 "y":5458.5
+                }, 
+                {
+                 "ellipse":true,
+                 "height":29,
+                 "id":8,
+                 "name":"",
+                 "properties":
+                    {
+
+                    },
+                 "rotation":0,
+                 "type":"commit",
+                 "visible":true,
+                 "width":29,
+                 "x":214.5,
+                 "y":5409.5
+                }, 
+                {
+                 "ellipse":true,
+                 "height":29,
+                 "id":9,
+                 "name":"",
+                 "properties":
+                    {
+
+                    },
+                 "rotation":0,
+                 "type":"commit",
+                 "visible":true,
+                 "width":29,
+                 "x":160.5,
+                 "y":5215.5
+                }, 
+                {
+                 "ellipse":true,
+                 "height":29,
+                 "id":10,
+                 "name":"",
+                 "properties":
+                    {
+
+                    },
+                 "rotation":0,
+                 "type":"commit",
+                 "visible":true,
+                 "width":29,
+                 "x":362.5,
+                 "y":4510.5
+                }, 
+                {
+                 "ellipse":true,
+                 "height":29,
+                 "id":11,
+                 "name":"",
+                 "properties":
+                    {
+                     "powerup":"extralive"
+                    },
+                 "rotation":0,
+                 "type":"powerup",
+                 "visible":true,
+                 "width":29,
+                 "x":361.5,
+                 "y":4408.5
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -88,14 +177,17 @@
          "x":0,
          "y":0
         }],
+ "nextobjectid":12,
  "orientation":"orthogonal",
  "properties":
     {
 
     },
+ "renderorder":"right-down",
  "tileheight":50,
  "tilesets":[
         {
+         "columns":9,
          "firstgid":1,
          "image":"..\/..\/..\/resources\/tileset.png",
          "imageheight":450,
@@ -107,6 +199,7 @@
 
             },
          "spacing":0,
+         "tilecount":81,
          "tileheight":50,
          "tilewidth":50
         }],
