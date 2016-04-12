@@ -89,7 +89,6 @@ GameEngine.World.prototype = {
       powerups = this.add.group();
       powerups.enableBody = true;
       powerups.physicsBodyType = Phaser.Physics.ARCADE;
-      // this.setupPowerUps();
 
       // Enemies
       enemies = this.add.group();
@@ -97,7 +96,8 @@ GameEngine.World.prototype = {
       enemies.physicsBodyType = Phaser.Physics.ARCADE;
       // map.createFromObjects('objects', 74, 'enemy', 0, true, false, enemies);
       // enemies.position.x += mapOffsetX;
-      this.setupEnemies();
+
+      this.setupMapObjects();
 
       //  An explosion pool
       explosions = this.add.group();
@@ -180,27 +180,30 @@ GameEngine.World.prototype = {
       explosion.scale.setTo(0.5, 0.5);
     },
 
-    setupPowerUps: function() {
+    setupMapObjects: function() {
+      var self = this;
       map.objects['objects'].forEach(function(element){
+        // console.log(element);
         if(element.type === "powerup") {
-          p = powerups.create(element.x + 175, element.y, element.properties.sprite);
-        };
+          // self.setupPowerUps(element);
+        } else if (element.type === "commit") {
+          self.setupEnemies(element);
+        }
       });
     },
 
-    setupEnemies: function() {
+    setupPowerUps: function(element) {
+      p = powerups.create(element.x + 175, element.y, element.properties.sprite);
+    },
+
+    setupEnemies: function(element) {
       var rnd = this.game.rnd;
 
-      map.objects['objects'].forEach(function(element){
-        // console.log(element);
-        if(element.type === "commit") {
-          for (var i = 0; i < 3; i++) {
-            // TODO: replace '175' with this.mapOffsetX. Workaround!
-            e = enemies.create(element.x + 175 + rnd.integerInRange(-2, 2), element.y - 50 + i*10 + rnd.integerInRange(-2, 2), 'enemy');
-            e.hp = 5;
-          };
-        };
-      });
+      for (var i = 0; i < 3; i++) {
+        // TODO: replace '175' with this.mapOffsetX. Workaround!
+        e = enemies.create(element.x + 175 + rnd.integerInRange(-2, 2), element.y - 50 + i*10 + rnd.integerInRange(-2, 2), 'enemy');
+        e.hp = 5;
+      };
     },
 
     moveEnemies: function() {
