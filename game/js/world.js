@@ -110,6 +110,9 @@ GameEngine.World.prototype = {
       explosions.createMultiple(30, 'explosion');
       explosions.forEach(this.setupExplosion, this);
 
+      transparentBg = this.add.tileSprite(0, 0, this.world.width, this.world.height, 'bg_trans');
+      transparentBg.visible = false;
+
       //  Score
       scoreString = 'Score : ';
       scoreText = this.add.text(10, 10, scoreString + this.score, { font: '24px Arial', fill: '#fff' });
@@ -263,6 +266,8 @@ GameEngine.World.prototype = {
         e = enemies.create(element.x + 175 + rnd.integerInRange(-2, 2), element.y - 15 + i*10 + rnd.integerInRange(-2, 2), 'enemy');
         e.hp = 5;
         e.commitGroup = this.commitGroupIndex;
+        e.originX = e.x;
+        e.originY = e.y;
         e.autoCull = true;
       };
 
@@ -271,7 +276,7 @@ GameEngine.World.prototype = {
 
     checkGoal: function() {
       if ((this.camera.y + this.camera.height/2) <= this.goalline) {
-        this.gameWon();
+        this.gameWin();
       }
     },
 
@@ -286,7 +291,6 @@ GameEngine.World.prototype = {
     },
 
     enemyOut: function(enemy) {
-      // TODO: check for commit group
       if (!this.commitsLostList.includes(enemy.commitGroup)) {
         this.commitsLostList += enemy.commitGroup;
         console.log("commit missed");
@@ -298,11 +302,18 @@ GameEngine.World.prototype = {
     },
 
     moveEnemies: function() {
+      var self = this;
       var rnd = this.game.rnd;
       enemies.forEach(function(enemy) {
-        //TODO: check distance from commit
-        enemy.position.x += rnd.integerInRange(-1, 1);
-        enemy.position.y += rnd.integerInRange(-1, 1);
+        //TODO: add tween
+        rndX = rnd.integerInRange(-1, 1);
+        rndY = rnd.integerInRange(-1, 1);
+        if ( self.math.difference(enemy.originX, enemy.position.x + rndX) < 20 ) {
+          enemy.position.x += rndX;
+        }
+        if ( self.math.difference(enemy.originY, enemy.position.y + rndY) < 20 ) {
+          enemy.position.y += rndY;
+        }
       });
     },
 
@@ -405,7 +416,7 @@ GameEngine.World.prototype = {
             break;
           case "rage":
             player.hasRagePowerUp = true;
-            player.ragePowerUptTime = this.time.now + 200;
+            player.ragePowerUptTime = this.time.now + 3000;
             this.showInfoText("RAGE!");
             break;
           case "cherrypick":
@@ -422,8 +433,9 @@ GameEngine.World.prototype = {
     },
 
     checkPowerUps: function() {
-      if (player.ragePowerUptTime <= this.time.now) {
+      if (player.hasRagePowerUp && player.ragePowerUptTime <= this.time.now) {
         player.hasRagePowerUp = false;
+        this.showInfoText("RAGE is over");
       }
     },
 
@@ -467,17 +479,19 @@ GameEngine.World.prototype = {
       player.kill();
       this.stateText.text=" GAME OVER \n Click to 'git reset --hard'";
       this.stateText.visible = true;
+      transparentBg.visible = true;
       // this.game.paused = true;
     },
 
-    gameWon: function() {
-      console.log("game won");
+    gameWin: function() {
+      console.log("You win");
       this.score += player.lives*100;
       this.resetPowerUps();
       player.lives = 0;
-      this.stateText.text=" GAME WON \n Click to 'git commit' your score";
+      this.stateText.text=" YOU WIN! \n Click to 'git commit' your score";
       //TODO: set text style ?!
       this.stateText.visible = true;
+      transparentBg.visible = true;
     },
 
     updateHUDText: function() {

@@ -61,6 +61,7 @@ GameEngine.Preloader.prototype = {
     this.load.audio('powerup', 'assets/sfx/powerup.ogg');
 
     this.load.image('gitkraken', 'assets/ui/gitkraken.png');
+    this.load.image('bg_trans', 'assets/ui/bg_trans.png');
 
     this.load.image('starfield', 'assets/starfield.png');
     this.load.image('bullet', 'assets/bullet.png');

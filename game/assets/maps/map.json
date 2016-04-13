@@ -23,30 +23,35 @@
          "y":0
         }, 
         {
+         "draworder":"topdown",
          "height":0,
          "name":"objects",
          "objects":[
                 {
                  "height":32,
+                 "id":1,
                  "name":"goal",
                  "properties":
                     {
 
                     },
+                 "rotation":0,
                  "type":"",
                  "visible":true,
                  "width":35,
-                 "x":202,
-                 "y":1309
+                 "x":203,
+                 "y":261
                 }, 
                 {
                  "ellipse":true,
                  "height":29,
+                 "id":2,
                  "name":"",
                  "properties":
                     {
                      "powerup":"duallaser"
                     },
+                 "rotation":0,
                  "type":"powerup",
                  "visible":true,
                  "width":29,
@@ -56,11 +61,13 @@
                 {
                  "ellipse":true,
                  "height":29,
+                 "id":3,
                  "name":"",
                  "properties":
                     {
 
                     },
+                 "rotation":0,
                  "type":"commit",
                  "visible":true,
                  "width":29,
@@ -70,11 +77,13 @@
                 {
                  "ellipse":true,
                  "height":29,
+                 "id":4,
                  "name":"",
                  "properties":
                     {
 
                     },
+                 "rotation":0,
                  "type":"commit",
                  "visible":true,
                  "width":29,
@@ -84,11 +93,13 @@
                 {
                  "ellipse":true,
                  "height":29,
+                 "id":5,
                  "name":"",
                  "properties":
                     {
 
                     },
+                 "rotation":0,
                  "type":"commit",
                  "visible":true,
                  "width":29,
@@ -98,11 +109,13 @@
                 {
                  "ellipse":true,
                  "height":29,
+                 "id":6,
                  "name":"",
                  "properties":
                     {
 
                     },
+                 "rotation":0,
                  "type":"commit",
                  "visible":true,
                  "width":29,
@@ -112,11 +125,13 @@
                 {
                  "ellipse":true,
                  "height":29,
+                 "id":7,
                  "name":"",
                  "properties":
                     {
 
                     },
+                 "rotation":0,
                  "type":"commit",
                  "visible":true,
                  "width":29,
@@ -126,11 +141,13 @@
                 {
                  "ellipse":true,
                  "height":29,
+                 "id":8,
                  "name":"",
                  "properties":
                     {
 
                     },
+                 "rotation":0,
                  "type":"commit",
                  "visible":true,
                  "width":29,
@@ -140,11 +157,13 @@
                 {
                  "ellipse":true,
                  "height":29,
+                 "id":9,
                  "name":"",
                  "properties":
                     {
                      "powerup":"extralive"
                     },
+                 "rotation":0,
                  "type":"powerup",
                  "visible":true,
                  "width":29,
@@ -154,11 +173,13 @@
                 {
                  "ellipse":true,
                  "height":29,
+                 "id":10,
                  "name":"",
                  "properties":
                     {
 
                     },
+                 "rotation":0,
                  "type":"commit",
                  "visible":true,
                  "width":29,
@@ -168,11 +189,13 @@
                 {
                  "ellipse":true,
                  "height":29,
+                 "id":11,
                  "name":"",
                  "properties":
                     {
 
                     },
+                 "rotation":0,
                  "type":"commit",
                  "visible":true,
                  "width":29,
@@ -182,11 +205,13 @@
                 {
                  "ellipse":true,
                  "height":29,
+                 "id":12,
                  "name":"",
                  "properties":
                     {
 
                     },
+                 "rotation":0,
                  "type":"commit",
                  "visible":true,
                  "width":29,
@@ -196,11 +221,13 @@
                 {
                  "ellipse":true,
                  "height":29,
+                 "id":13,
                  "name":"",
                  "properties":
                     {
 
                     },
+                 "rotation":0,
                  "type":"commit",
                  "visible":true,
                  "width":29,
@@ -210,11 +237,13 @@
                 {
                  "ellipse":true,
                  "height":29,
+                 "id":14,
                  "name":"",
                  "properties":
                     {
 
                     },
+                 "rotation":0,
                  "type":"commit",
                  "visible":true,
                  "width":29,
@@ -224,11 +253,13 @@
                 {
                  "ellipse":true,
                  "height":29,
+                 "id":15,
                  "name":"",
                  "properties":
                     {
 
                     },
+                 "rotation":0,
                  "type":"commit",
                  "visible":true,
                  "width":29,
@@ -238,11 +269,13 @@
                 {
                  "ellipse":true,
                  "height":29,
+                 "id":16,
                  "name":"",
                  "properties":
                     {
 
                     },
+                 "rotation":0,
                  "type":"commit",
                  "visible":true,
                  "width":29,
@@ -252,11 +285,13 @@
                 {
                  "ellipse":true,
                  "height":29,
+                 "id":17,
                  "name":"",
                  "properties":
                     {
 
                     },
+                 "rotation":0,
                  "type":"commit",
                  "visible":true,
                  "width":29,
@@ -266,11 +301,13 @@
                 {
                  "ellipse":true,
                  "height":29,
+                 "id":18,
                  "name":"",
                  "properties":
                     {
 
                     },
+                 "rotation":0,
                  "type":"commit",
                  "visible":true,
                  "width":29,
@@ -280,11 +317,13 @@
                 {
                  "ellipse":true,
                  "height":29,
+                 "id":19,
                  "name":"",
                  "properties":
                     {
 
                     },
+                 "rotation":0,
                  "type":"commit",
                  "visible":true,
                  "width":29,
@@ -294,11 +333,13 @@
                 {
                  "ellipse":true,
                  "height":29,
+                 "id":20,
                  "name":"",
                  "properties":
                     {
 
                     },
+                 "rotation":0,
                  "type":"commit",
                  "visible":true,
                  "width":29,
@@ -308,11 +349,13 @@
                 {
                  "ellipse":true,
                  "height":29,
+                 "id":21,
                  "name":"",
                  "properties":
                     {
 
                     },
+                 "rotation":0,
                  "type":"commit",
                  "visible":true,
                  "width":29,
@@ -322,11 +365,13 @@
                 {
                  "ellipse":true,
                  "height":29,
+                 "id":22,
                  "name":"",
                  "properties":
                     {
 
                     },
+                 "rotation":0,
                  "type":"commit",
                  "visible":true,
                  "width":29,
@@ -336,11 +381,13 @@
                 {
                  "ellipse":true,
                  "height":29,
+                 "id":23,
                  "name":"",
                  "properties":
                     {
 
                     },
+                 "rotation":0,
                  "type":"commit",
                  "visible":true,
                  "width":29,
@@ -350,11 +397,13 @@
                 {
                  "ellipse":true,
                  "height":29,
+                 "id":24,
                  "name":"",
                  "properties":
                     {
 
                     },
+                 "rotation":0,
                  "type":"commit",
                  "visible":true,
                  "width":29,
@@ -364,11 +413,13 @@
                 {
                  "ellipse":true,
                  "height":29,
+                 "id":25,
                  "name":"",
                  "properties":
                     {
 
                     },
+                 "rotation":0,
                  "type":"commit",
                  "visible":true,
                  "width":29,
@@ -378,11 +429,13 @@
                 {
                  "ellipse":true,
                  "height":29,
+                 "id":26,
                  "name":"",
                  "properties":
                     {
 
                     },
+                 "rotation":0,
                  "type":"commit",
                  "visible":true,
                  "width":29,
@@ -392,11 +445,13 @@
                 {
                  "ellipse":true,
                  "height":29,
+                 "id":27,
                  "name":"",
                  "properties":
                     {
 
                     },
+                 "rotation":0,
                  "type":"commit",
                  "visible":true,
                  "width":29,
@@ -406,11 +461,13 @@
                 {
                  "ellipse":true,
                  "height":29,
+                 "id":28,
                  "name":"",
                  "properties":
                     {
 
                     },
+                 "rotation":0,
                  "type":"commit",
                  "visible":true,
                  "width":29,
@@ -420,11 +477,13 @@
                 {
                  "ellipse":true,
                  "height":29,
+                 "id":29,
                  "name":"",
                  "properties":
                     {
 
                     },
+                 "rotation":0,
                  "type":"commit",
                  "visible":true,
                  "width":29,
@@ -434,11 +493,13 @@
                 {
                  "ellipse":true,
                  "height":29,
+                 "id":30,
                  "name":"",
                  "properties":
                     {
 
                     },
+                 "rotation":0,
                  "type":"commit",
                  "visible":true,
                  "width":29,
@@ -448,11 +509,13 @@
                 {
                  "ellipse":true,
                  "height":29,
+                 "id":31,
                  "name":"",
                  "properties":
                     {
 
                     },
+                 "rotation":0,
                  "type":"commit",
                  "visible":true,
                  "width":29,
@@ -462,11 +525,13 @@
                 {
                  "ellipse":true,
                  "height":29,
+                 "id":32,
                  "name":"",
                  "properties":
                     {
 
                     },
+                 "rotation":0,
                  "type":"commit",
                  "visible":true,
                  "width":29,
@@ -476,11 +541,13 @@
                 {
                  "ellipse":true,
                  "height":29,
+                 "id":33,
                  "name":"",
                  "properties":
                     {
 
                     },
+                 "rotation":0,
                  "type":"commit",
                  "visible":true,
                  "width":29,
@@ -490,11 +557,13 @@
                 {
                  "ellipse":true,
                  "height":29,
+                 "id":34,
                  "name":"",
                  "properties":
                     {
 
                     },
+                 "rotation":0,
                  "type":"commit",
                  "visible":true,
                  "width":29,
@@ -504,11 +573,13 @@
                 {
                  "ellipse":true,
                  "height":29,
+                 "id":35,
                  "name":"",
                  "properties":
                     {
 
                     },
+                 "rotation":0,
                  "type":"commit",
                  "visible":true,
                  "width":29,
@@ -518,11 +589,13 @@
                 {
                  "ellipse":true,
                  "height":29,
+                 "id":36,
                  "name":"",
                  "properties":
                     {
 
                     },
+                 "rotation":0,
                  "type":"commit",
                  "visible":true,
                  "width":29,
@@ -532,11 +605,13 @@
                 {
                  "ellipse":true,
                  "height":29,
+                 "id":37,
                  "name":"",
                  "properties":
                     {
 
                     },
+                 "rotation":0,
                  "type":"commit",
                  "visible":true,
                  "width":29,
@@ -546,11 +621,13 @@
                 {
                  "ellipse":true,
                  "height":29,
+                 "id":38,
                  "name":"",
                  "properties":
                     {
 
                     },
+                 "rotation":0,
                  "type":"commit",
                  "visible":true,
                  "width":29,
@@ -560,11 +637,13 @@
                 {
                  "ellipse":true,
                  "height":29,
+                 "id":39,
                  "name":"",
                  "properties":
                     {
 
                     },
+                 "rotation":0,
                  "type":"commit",
                  "visible":true,
                  "width":29,
@@ -574,11 +653,13 @@
                 {
                  "ellipse":true,
                  "height":29,
+                 "id":40,
                  "name":"",
                  "properties":
                     {
 
                     },
+                 "rotation":0,
                  "type":"commit",
                  "visible":true,
                  "width":29,
@@ -588,11 +669,13 @@
                 {
                  "ellipse":true,
                  "height":29,
+                 "id":41,
                  "name":"",
                  "properties":
                     {
 
                     },
+                 "rotation":0,
                  "type":"commit",
                  "visible":true,
                  "width":29,
@@ -602,11 +685,13 @@
                 {
                  "ellipse":true,
                  "height":29,
+                 "id":42,
                  "name":"",
                  "properties":
                     {
 
                     },
+                 "rotation":0,
                  "type":"commit",
                  "visible":true,
                  "width":29,
@@ -616,11 +701,13 @@
                 {
                  "ellipse":true,
                  "height":29,
+                 "id":43,
                  "name":"",
                  "properties":
                     {
 
                     },
+                 "rotation":0,
                  "type":"commit",
                  "visible":true,
                  "width":29,
@@ -630,11 +717,13 @@
                 {
                  "ellipse":true,
                  "height":29,
+                 "id":44,
                  "name":"",
                  "properties":
                     {
 
                     },
+                 "rotation":0,
                  "type":"commit",
                  "visible":true,
                  "width":29,
@@ -644,11 +733,13 @@
                 {
                  "ellipse":true,
                  "height":29,
+                 "id":45,
                  "name":"",
                  "properties":
                     {
 
                     },
+                 "rotation":0,
                  "type":"commit",
                  "visible":true,
                  "width":29,
@@ -658,11 +749,13 @@
                 {
                  "ellipse":true,
                  "height":29,
+                 "id":46,
                  "name":"",
                  "properties":
                     {
 
                     },
+                 "rotation":0,
                  "type":"commit",
                  "visible":true,
                  "width":29,
@@ -672,11 +765,13 @@
                 {
                  "ellipse":true,
                  "height":29,
+                 "id":47,
                  "name":"",
                  "properties":
                     {
 
                     },
+                 "rotation":0,
                  "type":"commit",
                  "visible":true,
                  "width":29,
@@ -686,11 +781,13 @@
                 {
                  "ellipse":true,
                  "height":29,
+                 "id":48,
                  "name":"",
                  "properties":
                     {
                      "powerup":"rage"
                     },
+                 "rotation":0,
                  "type":"powerup",
                  "visible":true,
                  "width":29,
@@ -700,11 +797,13 @@
                 {
                  "ellipse":true,
                  "height":29,
+                 "id":49,
                  "name":"",
                  "properties":
                     {
                      "powerup":"duallaser"
                     },
+                 "rotation":0,
                  "type":"powerup",
                  "visible":true,
                  "width":29,
@@ -718,14 +817,17 @@
          "x":0,
          "y":0
         }],
+ "nextobjectid":50,
  "orientation":"orthogonal",
  "properties":
     {
 
     },
+ "renderorder":"right-down",
  "tileheight":50,
  "tilesets":[
         {
+         "columns":9,
          "firstgid":1,
          "image":"..\/..\/..\/resources\/tileset.png",
          "imageheight":450,
@@ -737,6 +839,7 @@
 
             },
          "spacing":0,
+         "tilecount":81,
          "tileheight":50,
          "tilewidth":50
         }],

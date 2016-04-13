@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" width="9" height="120" tilewidth="50" tileheight="50">
- <tileset firstgid="1" name="tileset" tilewidth="50" tileheight="50">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="9" height="120" tilewidth="50" tileheight="50" nextobjectid="50">
+ <tileset firstgid="1" name="tileset" tilewidth="50" tileheight="50" tilecount="81" columns="9">
   <image source="tileset.png" width="450" height="450"/>
  </tileset>
  <layer name="branches1" width="9" height="120">
@@ -251,159 +251,159 @@
 0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <objectgroup name="objects" width="0" height="0">
-  <object name="goal" x="202" y="1309" width="35" height="32"/>
-  <object type="powerup" x="60" y="4713" width="29" height="29">
+ <objectgroup name="objects">
+  <object id="1" name="goal" x="203" y="261" width="35" height="32"/>
+  <object id="2" type="powerup" x="60" y="4713" width="29" height="29">
    <properties>
     <property name="powerup" value="duallaser"/>
    </properties>
    <ellipse/>
   </object>
-  <object type="commit" x="262" y="4712" width="29" height="29">
+  <object id="3" type="commit" x="262" y="4712" width="29" height="29">
    <ellipse/>
   </object>
-  <object type="commit" x="212" y="5163" width="29" height="29">
+  <object id="4" type="commit" x="212" y="5163" width="29" height="29">
    <ellipse/>
   </object>
-  <object type="commit" x="159" y="5211" width="29" height="29">
+  <object id="5" type="commit" x="159" y="5211" width="29" height="29">
    <ellipse/>
   </object>
-  <object type="commit" x="109" y="4761" width="29" height="29">
+  <object id="6" type="commit" x="109" y="4761" width="29" height="29">
    <ellipse/>
   </object>
-  <object type="commit" x="363" y="4512" width="29" height="29">
+  <object id="7" type="commit" x="363" y="4512" width="29" height="29">
    <ellipse/>
   </object>
-  <object type="commit" x="62" y="4862" width="29" height="29">
+  <object id="8" type="commit" x="62" y="4862" width="29" height="29">
    <ellipse/>
   </object>
-  <object type="powerup" x="361" y="4412" width="29" height="29">
+  <object id="9" type="powerup" x="361" y="4412" width="29" height="29">
    <properties>
     <property name="powerup" value="extralive"/>
    </properties>
    <ellipse/>
   </object>
-  <object type="commit" x="112" y="5462" width="29" height="29">
+  <object id="10" type="commit" x="112" y="5462" width="29" height="29">
    <ellipse/>
   </object>
-  <object type="commit" x="62" y="4463" width="29" height="29">
+  <object id="11" type="commit" x="62" y="4463" width="29" height="29">
    <ellipse/>
   </object>
-  <object type="commit" x="362" y="4313" width="29" height="29">
+  <object id="12" type="commit" x="362" y="4313" width="29" height="29">
    <ellipse/>
   </object>
-  <object type="commit" x="162" y="4165" width="29" height="29">
+  <object id="13" type="commit" x="162" y="4165" width="29" height="29">
    <ellipse/>
   </object>
-  <object type="commit" x="310" y="4111" width="29" height="29">
+  <object id="14" type="commit" x="310" y="4111" width="29" height="29">
    <ellipse/>
   </object>
-  <object type="commit" x="111" y="3767" width="29" height="29">
+  <object id="15" type="commit" x="111" y="3767" width="29" height="29">
    <ellipse/>
   </object>
-  <object type="commit" x="107" y="3663" width="29" height="29">
+  <object id="16" type="commit" x="107" y="3663" width="29" height="29">
    <ellipse/>
   </object>
-  <object type="commit" x="310" y="3860" width="29" height="29">
+  <object id="17" type="commit" x="310" y="3860" width="29" height="29">
    <ellipse/>
   </object>
-  <object type="commit" x="310" y="3610" width="29" height="29">
+  <object id="18" type="commit" x="310" y="3610" width="29" height="29">
    <ellipse/>
   </object>
-  <object type="commit" x="110" y="3462" width="29" height="29">
+  <object id="19" type="commit" x="110" y="3462" width="29" height="29">
    <ellipse/>
   </object>
-  <object type="commit" x="263" y="3410" width="29" height="29">
+  <object id="20" type="commit" x="263" y="3410" width="29" height="29">
    <ellipse/>
   </object>
-  <object type="commit" x="359" y="3360" width="29" height="29">
+  <object id="21" type="commit" x="359" y="3360" width="29" height="29">
    <ellipse/>
   </object>
-  <object type="commit" x="209" y="3208" width="29" height="29">
+  <object id="22" type="commit" x="209" y="3208" width="29" height="29">
    <ellipse/>
   </object>
-  <object type="commit" x="59" y="3109" width="29" height="29">
+  <object id="23" type="commit" x="59" y="3109" width="29" height="29">
    <ellipse/>
   </object>
-  <object type="commit" x="64" y="3014" width="29" height="29">
+  <object id="24" type="commit" x="64" y="3014" width="29" height="29">
    <ellipse/>
   </object>
-  <object type="commit" x="209" y="2962" width="29" height="29">
+  <object id="25" type="commit" x="209" y="2962" width="29" height="29">
    <ellipse/>
   </object>
-  <object type="commit" x="113" y="2861" width="29" height="29">
+  <object id="26" type="commit" x="113" y="2861" width="29" height="29">
    <ellipse/>
   </object>
-  <object type="commit" x="262" y="2810" width="29" height="29">
+  <object id="27" type="commit" x="262" y="2810" width="29" height="29">
    <ellipse/>
   </object>
-  <object type="commit" x="109" y="2712" width="29" height="29">
+  <object id="28" type="commit" x="109" y="2712" width="29" height="29">
    <ellipse/>
   </object>
-  <object type="commit" x="260" y="2557" width="29" height="29">
+  <object id="29" type="commit" x="260" y="2557" width="29" height="29">
    <ellipse/>
   </object>
-  <object type="commit" x="311" y="2410" width="29" height="29">
+  <object id="30" type="commit" x="311" y="2410" width="29" height="29">
    <ellipse/>
   </object>
-  <object type="commit" x="112" y="2460" width="29" height="29">
+  <object id="31" type="commit" x="112" y="2460" width="29" height="29">
    <ellipse/>
   </object>
-  <object type="commit" x="112" y="2360" width="29" height="29">
+  <object id="32" type="commit" x="112" y="2360" width="29" height="29">
    <ellipse/>
   </object>
-  <object type="commit" x="210" y="2263" width="29" height="29">
+  <object id="33" type="commit" x="210" y="2263" width="29" height="29">
    <ellipse/>
   </object>
-  <object type="commit" x="358" y="2158" width="29" height="29">
+  <object id="34" type="commit" x="358" y="2158" width="29" height="29">
    <ellipse/>
   </object>
-  <object type="commit" x="110" y="2105" width="29" height="29">
+  <object id="35" type="commit" x="110" y="2105" width="29" height="29">
    <ellipse/>
   </object>
-  <object type="commit" x="209" y="2060" width="29" height="29">
+  <object id="36" type="commit" x="209" y="2060" width="29" height="29">
    <ellipse/>
   </object>
-  <object type="commit" x="310" y="2007" width="29" height="29">
+  <object id="37" type="commit" x="310" y="2007" width="29" height="29">
    <ellipse/>
   </object>
-  <object type="commit" x="259" y="1959" width="29" height="29">
+  <object id="38" type="commit" x="259" y="1959" width="29" height="29">
    <ellipse/>
   </object>
-  <object type="commit" x="58" y="1913" width="29" height="29">
+  <object id="39" type="commit" x="58" y="1913" width="29" height="29">
    <ellipse/>
   </object>
-  <object type="commit" x="264" y="1862" width="29" height="29">
+  <object id="40" type="commit" x="264" y="1862" width="29" height="29">
    <ellipse/>
   </object>
-  <object type="commit" x="111" y="1761" width="29" height="29">
+  <object id="41" type="commit" x="111" y="1761" width="29" height="29">
    <ellipse/>
   </object>
-  <object type="commit" x="359" y="1711" width="29" height="29">
+  <object id="42" type="commit" x="359" y="1711" width="29" height="29">
    <ellipse/>
   </object>
-  <object type="commit" x="210" y="1657" width="29" height="29">
+  <object id="43" type="commit" x="210" y="1657" width="29" height="29">
    <ellipse/>
   </object>
-  <object type="commit" x="54" y="1560" width="29" height="29">
+  <object id="44" type="commit" x="54" y="1560" width="29" height="29">
    <ellipse/>
   </object>
-  <object type="commit" x="312" y="1510" width="29" height="29">
+  <object id="45" type="commit" x="312" y="1510" width="29" height="29">
    <ellipse/>
   </object>
-  <object type="commit" x="161" y="1460" width="29" height="29">
+  <object id="46" type="commit" x="161" y="1460" width="29" height="29">
    <ellipse/>
   </object>
-  <object type="commit" x="260" y="1361" width="29" height="29">
+  <object id="47" type="commit" x="260" y="1361" width="29" height="29">
    <ellipse/>
   </object>
-  <object type="powerup" x="311" y="3359" width="29" height="29">
+  <object id="48" type="powerup" x="311" y="3359" width="29" height="29">
    <properties>
     <property name="powerup" value="rage"/>
    </properties>
    <ellipse/>
   </object>
-  <object type="powerup" x="59" y="3059" width="29" height="29">
+  <object id="49" type="powerup" x="59" y="3059" width="29" height="29">
    <properties>
     <property name="powerup" value="duallaser"/>
    </properties>
