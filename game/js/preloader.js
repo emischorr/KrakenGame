@@ -71,9 +71,10 @@ GameEngine.Preloader.prototype = {
     this.load.image('enemy', 'assets/enemy.png');
 
     //TODO: use correct assets
-    this.load.image('extralive', 'assets/ship.png');
-    this.load.image('duallaser', 'assets/ship.png');
-    this.load.image('rage', 'assets/ship.png');
+    this.load.image('extralive', 'assets/powerup-live.png');
+    this.load.image('duallaser', 'assets/powerup-laser.png');
+    this.load.image('rage', 'assets/powerup-rage.png');
+    this.load.image('cherrypick', 'assets/cherrypick.png');
 
     this.load.tilemap('map', 'assets/maps/map.json', null, Phaser.Tilemap.TILED_JSON);
     this.load.image('tiles', 'assets/maps/tileset.png');

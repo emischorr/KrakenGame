@@ -809,6 +809,22 @@
                  "width":29,
                  "x":59,
                  "y":3059
+                }, 
+                {
+                 "ellipse":true,
+                 "height":29,
+                 "id":50,
+                 "name":"",
+                 "properties":
+                    {
+                     "powerup":"cherrypick"
+                    },
+                 "rotation":0,
+                 "type":"powerup",
+                 "visible":true,
+                 "width":29,
+                 "x":112.5,
+                 "y":3714.5
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -817,7 +833,7 @@
          "x":0,
          "y":0
         }],
- "nextobjectid":50,
+ "nextobjectid":51,
  "orientation":"orthogonal",
  "properties":
     {

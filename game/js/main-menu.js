@@ -23,8 +23,10 @@ GameEngine.MainMenu.prototype = {
     this.add.tween(header).to( { alpha: 1 }, 2000, "Linear", true);
 
     // intro text
-    var intro = "Welcome Git Commander, \n\nBad alien guys trying to steal our commits.\n Good this newly developed GitKraken spaceship left our science lab last week.\n";
-    intro += "So get your Kraken and clone that repository...";
+    var intro = "Welcome Git Commander, \n\n We have good and bad news for you.\n";
+    intro += "Bad news: Some alien guys trying to steal our last commits.\n"
+    intro += "Good news: This newly developed GitKraken spaceship left our science lab just last week.\n";
+    intro += "So release your Kraken and do your job...";
     var i = this.game.add.text(this.game.width/2, this.game.height/2, intro, { font: "15px Arial", fill: "#fff", align: "center" });
     i.anchor.set(0.5);
 

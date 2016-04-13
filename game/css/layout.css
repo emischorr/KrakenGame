@@ -13,7 +13,7 @@ ul {
   margin: auto;
   width: 100%;
   height: 100%;
-  max-width: 1370px;
+  max-width: 1365px;
   max-height: 670px;
   background-color: #373d47;
   background-image: url('../images/git-gui.png');
@@ -23,7 +23,6 @@ ul {
   position: absolute;
   top: 41px;
   left: 174px;
-  /* left: -224px; right: 0; */
   margin: auto;
   width: 800px;
   z-index: 100;
@@ -34,9 +33,22 @@ ul {
   position: absolute;
   top: 42px;
   left: 974px;
-  width: 395px;
+  max-width: 374px;
   height: 600px;
+  margin: auto;
   padding: 0 10px;
-  background-color: #373d47;
+  background-color: #2d3132; /*#535a5e;*/
   color: #fff;
+}
+
+@media screen and (min-width: 1365px) {
+
+  #gameContainer {
+     left: -224px; right: 0;
+  }
+
+  #help {
+    left: 970px; right: 0;
+  }
+
 }
