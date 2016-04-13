@@ -22,15 +22,25 @@ GameEngine.World = function (game) {
     //  You can use any of these from any function within this State.
     //  But do consider them as being 'reserved words', i.e. don't create a property for your own game called "world" or you'll over-write the world reference.
 
+    this.commitGroupIndex = 0;
+    this.commitsLostList = [];
+
     this.mapOffsetX = 0;
+    this.goalline = 0;
 
     this.score = 0;
+    this.commitsLost = 0;
     this.bulletTime = 0;
     this.invincibleTime = 0;
 
     this.leftOffsetPoint = new Phaser.Point();
     this.rightOffsetPoint = new Phaser.Point();
 
+    this.stateText = null;
+    this.infoText = null;
+    this.infoTextTimer = 0;
+
+    this.engineEmitter = null;
 };
 
 GameEngine.World.prototype = {
@@ -61,19 +71,15 @@ GameEngine.World.prototype = {
       branch1Layer.tint = 0xdddddd;
       branch2Layer.tint = 0xdddddd;
 
+      // Particles
+      // this.setupParticles();
+
       // Player
-      player = this.add.sprite(this.world.width/2, this.world.height - 150, 'ship');
+      player = this.add.sprite(this.world.centerX, this.world.height - 150, 'ship');
       player.anchor.setTo(0.5, 0.5);
       this.physics.arcade.enable(player);
       player.body.collideWorldBounds = true;
       player.body.allowRotation = true;
-      player.lives = 1;
-      player.hasDoubleShot = false;
-
-      //the camera will follow the player in the world
-      // this.game.camera.follow(player);
-      // set camera to bottom
-      this.game.camera.y = this.world.height;
 
       //  Player bullet group
       bullets = this.add.group();
@@ -106,8 +112,22 @@ GameEngine.World.prototype = {
 
       //  Score
       scoreString = 'Score : ';
-      scoreText = this.add.text(10, 10, scoreString + this.score, { font: '34px Arial', fill: '#fff' });
+      scoreText = this.add.text(10, 10, scoreString + this.score, { font: '24px Arial', fill: '#fff' });
       scoreText.fixedToCamera = true;
+
+      commitsString = 'Commits lost : ';
+      commitsText = this.add.text(10, 40, commitsString + this.commitsLost, { font: '24px Arial', fill: '#fff' });
+      commitsText.fixedToCamera = true;
+
+      this.stateText = this.add.text(this.camera.width/2, this.camera.height/2, ' ', { font: '44px Arial', fill: '#a33', align: "center" });
+      this.stateText.anchor.setTo(0.5, 0.5);
+      this.stateText.visible = false;
+      this.stateText.fixedToCamera = true;
+
+      this.infoText = this.add.text(this.camera.width/2, 50, 'TEST', { font: '24px Arial', fill: '#fff', align: "center" });
+      this.infoText.anchor.setTo(0.5, 0.5);
+      this.infoText.visible = false;
+      this.infoText.fixedToCamera = true;
 
       // Controls
       cursors = this.input.keyboard.createCursorKeys();
@@ -120,23 +140,25 @@ GameEngine.World.prototype = {
       laserSound = this.add.audio('laser');
       explosionSound = this.add.audio('explosion');
       powerupSound = this.add.audio('powerup');
+
+      this.startGame();
     },
 
     update: function () {
       //  Scroll the background
       starfield.tilePosition.y += 0.8;
       // branchLayer.position.y -= 2;
-      this.camera.y -= 1;
+      if (player.lives >= 1) {
+        this.camera.y -= 1;
+      }
 
+      this.checkGoal();
       this.resetInvincible();
       this.checkPowerUps();
 
       this.moveEnemies();
 
-      this.playerMovement();
-      if (this.input.activePointer.leftButton.isDown || this.input.keyboard.isDown(Phaser.Keyboard.SPACEBAR)) {
-        this.shoot();
-      }
+      this.playerControl();
 
       // prevent player from leaving camera to the bottom
       if (player.position.y + player.height/2 >= this.camera.y+600) {
@@ -154,13 +176,33 @@ GameEngine.World.prototype = {
 
       this.checkEnemiesMissed();
 
-      this.updateScoreText();
+      this.updateHUDText();
+      this.checkInfoText();
+
+      if(player.lives == 0 && this.input.activePointer.justPressed()) {
+        // this.startGame();
+        this.state.start('MainMenu');
+      }
+
+      // update particles
+      // this.engineEmitter.minParticleSpeed.set(px, py);
+      // this.engineEmitter.maxParticleSpeed.set(px, py);
+      //
+      // this.engineEmitter.emitX = player.x;
+      // this.engineEmitter.emitY = player.y;
     },
 
     render: function() {
       // this.game.debug.cameraInfo(this.camera, 32, 32);
       // this.game.debug.spriteBounds(player);
       // this.game.debug.spriteInfo(player, this.camera.width-400, 32);
+    },
+
+    startGame: function () {
+      this.game.camera.y = this.world.height;
+
+      player.lives = 1;
+      player.hasDoubleShot = false;
     },
 
     quitGame: function (pointer) {
@@ -174,6 +216,17 @@ GameEngine.World.prototype = {
     },
 
 
+
+    setupParticles: function() {
+      this.engineEmitter = this.add.emitter(this.world.centerX, this.world.centerY, 400);
+      this.engineEmitter.makeParticles( [ 'fire1', 'fire2', 'fire3', 'smoke' ] );
+
+      this.engineEmitter.gravity = 200;
+      this.engineEmitter.setAlpha(1, 0, 3000);
+      this.engineEmitter.setScale(0.8, 0, 0.8, 0, 3000);
+
+      this.engineEmitter.start(false, 3000, 5);
+    },
 
     setupExplosion: function(explosion) {
       explosion.anchor.x = 0.5;
@@ -190,6 +243,9 @@ GameEngine.World.prototype = {
           self.setupPowerUps(element);
         } else if (element.type === "commit") {
           self.setupEnemies(element);
+        } else if (element.name === "goal") {
+          self.goalline = element.y;
+          console.log("set goal to: "+this.goalline);
         }
       });
     },
@@ -206,8 +262,17 @@ GameEngine.World.prototype = {
         // TODO: replace '175' with this.mapOffsetX. Workaround!
         e = enemies.create(element.x + 175 + rnd.integerInRange(-2, 2), element.y - 15 + i*10 + rnd.integerInRange(-2, 2), 'enemy');
         e.hp = 5;
+        e.commitGroup = this.commitGroupIndex;
         e.autoCull = true;
       };
+
+      this.commitGroupIndex += 1;
+    },
+
+    checkGoal: function() {
+      if ((this.camera.y + this.camera.height/2) <= this.goalline) {
+        this.gameWon();
+      }
     },
 
     checkEnemiesMissed: function() {
@@ -222,43 +287,52 @@ GameEngine.World.prototype = {
 
     enemyOut: function(enemy) {
       // TODO: check for commit group
-      console.log("commit missed");
-      // TODO: print message
-      this.score -= 50;
-      enemy.kill();
+      if (!this.commitsLostList.includes(enemy.commitGroup)) {
+        this.commitsLostList += enemy.commitGroup;
+        console.log("commit missed");
+        // this.showInfoText("Commit lost");
+        this.commitsLost += 1;
+        this.score -= 50;
+        enemy.kill();
+      }
     },
 
     moveEnemies: function() {
       var rnd = this.game.rnd;
       enemies.forEach(function(enemy) {
+        //TODO: check distance from commit
         enemy.position.x += rnd.integerInRange(-1, 1);
         enemy.position.y += rnd.integerInRange(-1, 1);
       });
-      // enemies.position.x += this.game.rnd.integerInRange(-1, 1);
-      // enemies.position.y += this.game.rnd.integerInRange(-1, 1);
     },
 
-    playerMovement: function() {
+    playerControl: function() {
       player.body.velocity.setTo(0, 0);
       player.body.angularVelocity = 0;
 
-      if (cursors.left.isDown || this.input.keyboard.isDown(Phaser.Keyboard.A)) {
-        player.body.velocity.x = -150;
-      }
-      else if (cursors.right.isDown || this.input.keyboard.isDown(Phaser.Keyboard.D)) {
-        player.body.velocity.x = 150;
-      }
-      if (cursors.up.isDown || this.input.keyboard.isDown(Phaser.Keyboard.W)) {
-        player.body.velocity.y = -150;
-      }
-      else if (cursors.down.isDown || this.input.keyboard.isDown(Phaser.Keyboard.S)) {
-        player.body.velocity.y = 150;
-      }
+      if (player.lives >= 1) {
+        if (cursors.left.isDown || this.input.keyboard.isDown(Phaser.Keyboard.A)) {
+          player.body.velocity.x = -150;
+        }
+        else if (cursors.right.isDown || this.input.keyboard.isDown(Phaser.Keyboard.D)) {
+          player.body.velocity.x = 150;
+        }
+        if (cursors.up.isDown || this.input.keyboard.isDown(Phaser.Keyboard.W)) {
+          player.body.velocity.y = -150;
+        }
+        else if (cursors.down.isDown || this.input.keyboard.isDown(Phaser.Keyboard.S)) {
+          player.body.velocity.y = 150;
+        }
 
-      // player.body.velocity.copyFrom(this.physics.arcade.velocityFromAngle(player.angle, 300));
+        // player.body.velocity.copyFrom(this.physics.arcade.velocityFromAngle(player.angle, 300));
 
-      // player.body.angularVelocity = -200;
-      player.rotation = this.currentRotation() + this.game.math.degToRad(90);
+        // player.body.angularVelocity = -200;
+        player.rotation = this.currentRotation() + this.game.math.degToRad(90);
+
+        if (this.input.activePointer.leftButton.isDown || this.input.keyboard.isDown(Phaser.Keyboard.SPACEBAR)) {
+          this.shoot();
+        }
+      }
     },
 
     shoot: function() {
@@ -300,7 +374,7 @@ GameEngine.World.prototype = {
 
         this.score += 10;
 
-        // TODO: add explosion
+        // explosion
         var explosion = explosions.getFirstExists(false);
         explosion.reset(enemy.body.x, enemy.body.y);
         explosion.play('explosion', 30, false, true);
@@ -323,13 +397,20 @@ GameEngine.World.prototype = {
         switch (powerup.powerup) {
           case "extralive":
             player.lives += 1;
+            this.showInfoText("Extra Live");
             break;
           case "duallaser":
             player.hasDoubleShot = true;
+            this.showInfoText("Laser Upgrade");
             break;
           case "rage":
             player.hasRagePowerUp = true;
             player.ragePowerUptTime = this.time.now + 200;
+            this.showInfoText("RAGE!");
+            break;
+          case "cherrypick":
+            this.score += 100;
+            this.showInfoText("Cherry Pick");
             break;
           default:
             console.log("WARNING: Powerup '"+powerup.powerup+"' not supported!");
@@ -337,7 +418,6 @@ GameEngine.World.prototype = {
         powerup.kill();
         powerupSound.play();
         this.score += 20;
-        // TODO: show powerup text e.g. "Extra Live"
       }
     },
 
@@ -358,14 +438,13 @@ GameEngine.World.prototype = {
       if (!player.invincible) {
         console.log('player hit: lives: '+player.lives);
         if (player.lives <= 1) {
-          this.resetPowerUps();
-          this.killPlayer();
+          this.gameOver();
         } else {
           player.lives -= 1;
           this.resetPowerUps();
           player.invincible = true;
           this.invincibleTime = this.time.now + 3000;
-          // TODO: remove player from enemy/object
+          // remove player from enemy/object
           player.position.y += 50;
           // player hit animation; pulse; change alpha
           player.alpha = 0.5;
@@ -381,13 +460,29 @@ GameEngine.World.prototype = {
       }
     },
 
-    killPlayer: function() {
+    gameOver: function() {
+      console.log("game over");
+      this.resetPowerUps();
+      player.lives = 0;
       player.kill();
-      // TODO: GAME OVER Screen
+      this.stateText.text=" GAME OVER \n Click to 'git reset --hard'";
+      this.stateText.visible = true;
+      // this.game.paused = true;
     },
 
-    updateScoreText: function() {
+    gameWon: function() {
+      console.log("game won");
+      this.score += player.lives*100;
+      this.resetPowerUps();
+      player.lives = 0;
+      this.stateText.text=" GAME WON \n Click to 'git commit' your score";
+      //TODO: set text style ?!
+      this.stateText.visible = true;
+    },
+
+    updateHUDText: function() {
       scoreText.text = scoreString + this.score;
+      commitsText.text = commitsString + this.commitsLost;
     },
 
     pause: function() {
@@ -397,6 +492,18 @@ GameEngine.World.prototype = {
 
     currentRotation: function() {
       return this.physics.arcade.angleToPointer(player);
+    },
+
+    showInfoText: function(text) {
+      this.infoText.text = text;
+      this.infoText.visible = true;
+      this.infoTextTimer = this.time.now + 2000;
+    },
+
+    checkInfoText: function() {
+      if (this.infoText.visible && this.infoTextTimer <= this.time.now) {
+        this.infoText.visible = false;
+      }
     }
 
 };

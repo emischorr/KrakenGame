@@ -1,3 +1,5 @@
+
+#### Ideen ####
 git init
 
 git config --local user.name (oder --global mit globaler highscore)
@@ -25,6 +27,8 @@ Image für Schrift: https://pbs.twimg.com/media/CfYv6h3XEAAswiQ.jpg:large
 
 zwischen Map und Background noch eine layer (mit branch bild) für parallex effect
 
+particle effects
+
 background farbe: #242728;
 branch-farben:
 -------
@@ -44,6 +48,7 @@ orange: #f55f24;
 - oben angekommen ist das level beendet
 - Punkte pro gerettetem Commit
 - Garbage Collection als großer Pacman (Gegner) der sich nur vertikal bewegt (wenn kollision -> game over)
+- Rebase als hindernis auf einem branch
 - PowerUps ?!
 
 
@@ -62,4 +67,11 @@ Is this your first time using git? You should read git --help (loose game)
 #### SOUND ####
 
 http://www.superflashbros.net/as3sfxr/
+Tyrian Sound
+
+
+#### HOSTING ####
+
+https://pages.github.com/
+
 
