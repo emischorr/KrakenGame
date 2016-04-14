@@ -24,9 +24,9 @@ GameEngine.MainMenu.prototype = {
 
     // intro text
     var intro = "Welcome Git Commander, \n\n We have good and bad news for you.\n";
-    intro += "Bad news: Some alien guys trying to steal our last commits.\n"
-    intro += "Good news: This newly developed GitKraken spaceship left our science lab just last week.\n";
-    intro += "So release your Kraken and do your job...";
+    intro += "The bad news: Some alien guys trying to steal our last commits.\n"
+    intro += "But the good news is: This newly developed GitKraken spaceship left our science lab just last week.\n";
+    intro += "So release your Kraken and clean that repository...";
     var i = this.game.add.text(this.game.width/2, this.game.height/2, intro, { font: "15px Arial", fill: "#fff", align: "center" });
     i.anchor.set(0.5);
 
