@@ -36,7 +36,8 @@ GameEngine.World = function (game) {
     this.leftOffsetPoint = new Phaser.Point();
     this.rightOffsetPoint = new Phaser.Point();
 
-    this.stateText = null;
+    this.gameOverText = null;
+    this.gameWinText = null;
     this.infoText = null;
     this.infoTextTimer = 0;
 
@@ -52,6 +53,8 @@ GameEngine.World.prototype = {
       // Background
       this.stage.backgroundColor = '#373d47';
       starfield = this.add.tileSprite(0, 0, this.world.width, this.world.height, 'starfield');
+      git_bg = this.add.tileSprite(0, 0, this.world.width, this.world.height, 'git_bg');
+      git_bg.tint = 0x555555;
 
       // Map
       map = this.add.tilemap('map');
@@ -122,10 +125,15 @@ GameEngine.World.prototype = {
       commitsText = this.add.text(10, 40, commitsString + this.commitsLost, { font: '24px Arial', fill: '#fff' });
       commitsText.fixedToCamera = true;
 
-      this.stateText = this.add.text(this.camera.width/2, this.camera.height/2, ' ', { font: '44px Arial', fill: '#a33', align: "center" });
-      this.stateText.anchor.setTo(0.5, 0.5);
-      this.stateText.visible = false;
-      this.stateText.fixedToCamera = true;
+      this.gameOverText = this.add.text(this.camera.width/2, this.camera.height/2, ' ', { font: '44px Arial', fill: '#a33', align: "center" });
+      this.gameOverText.anchor.setTo(0.5, 0.5);
+      this.gameOverText.visible = false;
+      this.gameOverText.fixedToCamera = true;
+
+      this.gameWinText = this.add.text(this.camera.width/2, this.camera.height/2, ' ', { font: '44px Arial', fill: '#494', align: "center" });
+      this.gameWinText.anchor.setTo(0.5, 0.5);
+      this.gameWinText.visible = false;
+      this.gameWinText.fixedToCamera = true;
 
       this.infoText = this.add.text(this.camera.width/2, 50, 'TEST', { font: '24px Arial', fill: '#fff', align: "center" });
       this.infoText.anchor.setTo(0.5, 0.5);
@@ -149,7 +157,8 @@ GameEngine.World.prototype = {
 
     update: function () {
       //  Scroll the background
-      starfield.tilePosition.y += 0.8;
+      starfield.tilePosition.y += 0.5;
+      git_bg.tilePosition.y += 0.8;
       // branchLayer.position.y -= 2;
       if (player.lives >= 1) {
         this.camera.y -= 1;
@@ -248,7 +257,7 @@ GameEngine.World.prototype = {
           self.setupEnemies(element);
         } else if (element.name === "goal") {
           self.goalline = element.y;
-          console.log("set goal to: "+this.goalline);
+          console.log("set goal to: "+self.goalline);
         }
       });
     },
@@ -477,8 +486,8 @@ GameEngine.World.prototype = {
       this.resetPowerUps();
       player.lives = 0;
       player.kill();
-      this.stateText.text=" GAME OVER \n Click to 'git reset --hard'";
-      this.stateText.visible = true;
+      this.gameOverText.text=" GAME OVER \n Click to 'git reset --hard'";
+      this.gameOverText.visible = true;
       transparentBg.visible = true;
       // this.game.paused = true;
     },
@@ -488,9 +497,9 @@ GameEngine.World.prototype = {
       this.score += player.lives*100;
       this.resetPowerUps();
       player.lives = 0;
-      this.stateText.text=" YOU WIN! \n Click to 'git commit' your score";
+      this.gameWinText.text=" YOU WIN!\n SCORE: "+this.score+" \n Click to 'git commit' your score";
       //TODO: set text style ?!
-      this.stateText.visible = true;
+      this.gameWinText.visible = true;
       transparentBg.visible = true;
     },
 
