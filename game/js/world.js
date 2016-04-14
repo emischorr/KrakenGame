@@ -53,8 +53,12 @@ GameEngine.World.prototype = {
       // Background
       this.stage.backgroundColor = '#373d47';
       starfield = this.add.tileSprite(0, 0, this.world.width, this.world.height, 'starfield');
-      git_bg = this.add.tileSprite(0, 0, this.world.width, this.world.height, 'git_bg');
-      git_bg.tint = 0x555555;
+      git_bg1 = this.add.tileSprite(0, 0, this.world.width, this.world.height, 'git_bg1');
+      git_bg1.tint = 0x555555;
+      git_bg2 = this.add.tileSprite(0, 0, this.world.width, this.world.height, 'git_bg2');
+      git_bg2.tint = 0x555555;
+      git_bg3 = this.add.tileSprite(0, 0, this.world.width, this.world.height, 'git_bg3');
+      git_bg3.tint = 0x555555;
 
       // Map
       map = this.add.tilemap('map');
@@ -157,8 +161,10 @@ GameEngine.World.prototype = {
 
     update: function () {
       //  Scroll the background
-      starfield.tilePosition.y += 0.5;
-      git_bg.tilePosition.y += 0.8;
+      starfield.tilePosition.y += 0.4;
+      git_bg1.tilePosition.y += 0.5;
+      git_bg2.tilePosition.y += 0.7;
+      git_bg3.tilePosition.y += 0.9;
       // branchLayer.position.y -= 2;
       if (player.lives >= 1) {
         this.camera.y -= 1;

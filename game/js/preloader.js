@@ -64,7 +64,9 @@ GameEngine.Preloader.prototype = {
     this.load.image('bg_trans', 'assets/ui/bg_trans.png');
 
     this.load.image('starfield', 'assets/starfield.png');
-    this.load.image('git_bg', 'assets/git_bg.png');
+    this.load.image('git_bg1', 'assets/git_bg1.png');
+    this.load.image('git_bg2', 'assets/git_bg2.png');
+    this.load.image('git_bg3', 'assets/git_bg3.png');
     this.load.image('bullet', 'assets/bullet.png');
     this.load.spritesheet('explosion', 'assets/explosion.png', 128, 128);
     // this.load.spritesheet('ship', 'assets/ship.png', 50, 50);
